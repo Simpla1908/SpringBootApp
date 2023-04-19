@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.nadhem.produits.repos.ProduitRepository;
 import com.nadhem.produits.entities.Produit;
+import com.nadhem.produits.entities.Categorie;
+
 
 
 @SpringBootTest
@@ -53,5 +55,82 @@ class ProduitsApplicationTests {
 	System.out.println(p);
 	}
 	}
+	
+	@Test
+	public void testFindByNomProduit()
+	{
+	List<Produit> prods = produitRepository.findByNomProduit("PC Asus");
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	
+	@Test
+	public void testFindByNomProduitContains ()
+	{
+	List<Produit> prods=produitRepository.findByNomProduitContains("P");
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	} 
+	}
+	
+	@Test
+	public void testfindByNomPrix()
+	{
+	List<Produit> prods = produitRepository.findByNomPrix("PC Dell", 1000.0);
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	
+	@Test
+	public void testfindByCategorie()
+	{
+	Categorie cat = new Categorie();
+	cat.setIdCat(1L);
+	List<Produit> prods = produitRepository.findByCategorie(cat);
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	
+	@Test
+	public void findByCategorieIdCat()
+	{
+	List<Produit> prods = produitRepository.findByCategorieIdCat(1L);
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	
+	@Test
+	public void testfindByOrderByNomProduitAsc()
+	{
+	List<Produit> prods =produitRepository.findByOrderByNomProduitAsc();
+	
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
+	
+	
+	@Test
+	public void testTrierProduitsNomsPrix()
+	{
+	List<Produit> prods = produitRepository.trierProduitsNomsPrix();
+	for (Produit p : prods)
+	{
+	System.out.println(p);
+	}
+	}
 
+	
+	
+	
 }
