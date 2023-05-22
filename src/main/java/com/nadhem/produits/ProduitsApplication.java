@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import com.nadhem.produits.entities.Produit;
+import com.nadhem.produits.entities.Categorie;
+
 
 
 @SpringBootApplication
@@ -20,7 +22,7 @@ public class ProduitsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repositoryRestConfiguration.exposeIdsFor(Produit.class);
+		repositoryRestConfiguration.exposeIdsFor(Produit.class,Categorie.class);
 		
 	}
 
