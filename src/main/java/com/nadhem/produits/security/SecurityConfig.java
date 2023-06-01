@@ -24,24 +24,21 @@ public class SecurityConfig {
 	 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception 
 	{ 		
 		 http.csrf().disable()
-		    .sessionManagement()
-	          .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-	          
-	          .cors().configurationSource(new CorsConfigurationSource() {
-	 			 @Override
-	 			 public CorsConfiguration getCorsConfiguration(HttpServletRequest 
-	 			request) {
-	 			 CorsConfiguration config = new CorsConfiguration();
-	 			 
-	 			 config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-	 			 config.setAllowedMethods(Collections.singletonList("*"));
-	 			 config.setAllowCredentials(true);
-	 			 config.setAllowedHeaders(Collections.singletonList("*"));
-	 			 config.setExposedHeaders(Arrays.asList("Authorization"));
-	 			 config.setMaxAge(3600L);
-	 			 return config;
-	 			 }
-	 			 }).and().authorizeHttpRequests()
+		    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		    .cors().configurationSource(new CorsConfigurationSource() {
+		    @Override
+		    public CorsConfiguration getCorsConfiguration(HttpServletRequest
+		    request) {
+		    CorsConfiguration config = new CorsConfiguration();
+		    config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+		    config.setAllowedMethods(Collections.singletonList("*"));
+		    config.setAllowCredentials(true);
+		    config.setAllowedHeaders(Collections.singletonList("*"));
+		    config.setExposedHeaders(Arrays.asList("Authorization"));
+		    config.setMaxAge(3600L);
+		    return config;
+		    }
+		    }).and().authorizeHttpRequests()
 			    .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER")
 			    .requestMatchers("/api/getbyid/**").hasAnyAuthority("ADMIN","USER")
 			    .requestMatchers(HttpMethod.POST,"/api/addprod/**").hasAuthority("ADMIN")
